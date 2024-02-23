@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     paths:
-      .github/blank.yml
+      .github/workflows/blank.yml
   workflow_dispatch:
 
 jobs:
