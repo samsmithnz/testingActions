@@ -1,22 +1,19 @@
-name: CI
+name: JavaScript Exception Check
 
-on:
-  push:
-    paths:
-      .github/workflows/blank.yml
-  workflow_dispatch:
+on: [push, pull_request]
 
 jobs:
-  build:
+  exception-check:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-      - name: Run a one-line script
-        run: echo Hello, world!
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      - name: Run a multi-line script
+      - name: Run JavaScript script
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          node -e "throw new Error('This is an intentional exception');"
